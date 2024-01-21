@@ -1,0 +1,52 @@
+service:
+RDS -- 
+
+Single DB instance   /*reates a single DB instance with no standby DB instances*/
+
+#rds instance will get launched in one of subnet az, if any thing happens and it crashes, we don't have any other backups 
+
+Multi-AZ DB instance /*Creates a primary DB instance and a standby DB instance in a different AZ. Provides high availability and data redundancy, but the standby DB instance doesn't 
+support connections for read workloads.*/
+
+#rds instance will get launched in multiple az of your subnet, and if db instance in one az will crash another will be there for a backup 
+# In multiple-zone , we cannot send traffic like write operations to one az and read operations to another az, it will only be useful if any of it went crash or something, the other will be a backup
+#In this case we can create read replicas of our db instance and that we can use it for read operations and main db for write operations , after creating this we need to configure these in application level 
+# whatever the data is present in main db same will be present in read replica and you can't perform write operations in read replica
+
+Multi-AZ DB Cluster
+
+#Creates a DB cluster with a primary DB instance and two readable standby DB instances, with each DB instance in a different Availability Zone (AZ). 
+Provides high availability, data redundancy and increases capacity to serve read workloads.
+
+ elastic-cache:-->it's a in memory cache for rds --> we have two options one is redis cluster,and memcached cluster in elastic-cache
+
+=======
+
+service:
+dynamodb 
+It will be stores data in json format and rds will store in tabular form  
+DAX: dynamodb accelarator -> it's in memory cache solution for dynamodb: it stores the data of what queries are frequenlty using 
+========================
+
+service:
+amazon documentdb --with mongodb compatibility
+=============================
+
+service:
+neptune: graph database
+=====================================
+
+service:
+Amazon Redshift: data warehouse
+all data will get stored in ssd and queries will execute more quick
+ it has two components 
+     1)leader node --- it is used to execute the queries in compute node
+	 2)compute node  ---actual data is storing in compute node 
+
+chepest data warehousing solution
+
+=========================
+ 
+
+
+
